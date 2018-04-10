@@ -1,0 +1,23 @@
+function [ x ] = calDet( a )
+[r,c]=size(a);
+if(r==c)
+    if(size(a)==1)
+        x=a;
+    elseif(size(a)==2)
+        x=(a(1,1)*a(2,2))-(a(1,2)*a(2,1));
+    else
+       for i=1:size(a,1)
+           x_temp=a;
+           x_temp(1,:)=[];
+           x_temp(:,i)=[];
+           if i==1
+               x=(a(1,i)*((-1)^(i+1))*calDet(x_temp));
+           else
+               x=x+(a(1,i)*((-1)^(i+1))*calDet(x_temp));
+           end
+       end
+    end
+else
+    fprintf('ERROR: Matrix is not square please input a square matrix\n');
+end
+
